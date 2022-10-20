@@ -90,7 +90,7 @@ const defaultIngredients: TIngredient[] = [
 // For now this is localstorage,
 // as soon as I do auth and DB stuff it'll be that instead
 export const useIngredients = () => {
-  // This doesn't need to be state, but it makes the mental gymnastics easier
+  // This doesn't need to be state, but it makes the mental gymnastics easier before there is a db
   const [ingredients, setIngredients] = useState<TIngredient[]>([])
 
   useEffect(() => {

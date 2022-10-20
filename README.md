@@ -20,6 +20,7 @@ Most are expensive or limited in their free nature, I'll do an extremely basic t
 ### Stock images
 
 https://www.pexels.com/ was near the top on google...
+https://icons8.com/icons/set/chocolate Favico is from here
 
 # From the T3 default readme
 

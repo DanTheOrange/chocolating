@@ -21,4 +21,7 @@ export default defineNextConfig({
     locales: ["en"],
     defaultLocale: "en",
   },
+  devIndicators: {
+    buildActivityPosition: "bottom-right",
+  },
 })
