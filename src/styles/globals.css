@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* form styles */
+input[type="text"] {
+  @apply rounded-md border border-transparent bg-gray-100 
+    focus:border-gray-500 focus:bg-white 
+      focus:ring-0;
+}
