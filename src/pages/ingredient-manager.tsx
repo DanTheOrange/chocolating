@@ -15,7 +15,7 @@ const IngredientManager: NextPage = () => (
     <div className="m-10 flex flex-col gap-4">
       <h1 className="text-3xl">Ingredient manager</h1>
       <AddIngredientModal />
-      <FormattedIngredientsList ListItem={IngredientListItem} />
+      <FormattedIngredientsList ListItem={IngredientListItem} className="max-w-2xl" />
     </div>
   </IngredientsProvider>
 )

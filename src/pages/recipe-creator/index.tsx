@@ -1,28 +1,19 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import { useRecipes } from "hooks/useRecipes"
+import { RecipesProvider, useRecipes } from "hooks/useRecipes"
+import { RecipeList } from "components/pages/recipe-creator/RecipeList"
 
-const RecipeCreator: NextPage = () => {
-  const { recipes } = useRecipes()
+const RecipeCreator: NextPage = () => (
+  <RecipesProvider>
+    <Head>
+      <title>Chocolating - Recipe Creator</title>
+    </Head>
 
-  return (
-    <>
-      <Head>
-        <title>Chocolating - Recipe Creator</title>
-      </Head>
-
-      <div>
-        <h1>Recipe Creator</h1>
-        {recipes && (
-          <ul>
-            {recipes.map(({ name }) => (
-              <li>{name}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </>
-  )
-}
+    <div className="m-10 flex flex-col gap-4">
+      <h1 className="text-3xl">Recipe Creator</h1>
+      <RecipeList />
+    </div>
+  </RecipesProvider>
+)
 
 export default RecipeCreator

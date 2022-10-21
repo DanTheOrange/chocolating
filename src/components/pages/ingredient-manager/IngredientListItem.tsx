@@ -1,16 +1,24 @@
 import { Disclosure, Transition } from "@headlessui/react"
 import { BsChevronDown } from "react-icons/bs"
 import { TIngredient } from "hooks/useIngredients"
+import cn from "classnames"
+
+type TIngredientListItemProps = {
+  ingredient: TIngredient
+}
 
 export const IngredientListItem = ({
   ingredient: { name, nutrition },
-}: {
-  ingredient: TIngredient
-}) => (
+}: TIngredientListItemProps) => (
   <Disclosure>
     {({ open }) => (
       <>
-        <Disclosure.Button className="flex flex-row items-center justify-between rounded-sm bg-gray-300 px-2">
+        <Disclosure.Button
+          className={cn("flex flex-row items-center justify-between bg-gray-300 px-2", {
+            "rounded-t-md": open,
+            "rounded-md": !open,
+          })}
+        >
           {name}
           <BsChevronDown className={open ? "rotate-180 transform" : ""} />
         </Disclosure.Button>
@@ -23,7 +31,7 @@ export const IngredientListItem = ({
             leaveFrom="transform translate-y-0 opacity-100"
             leaveTo="transform -translate-y-full opacity-0"
           >
-            <Disclosure.Panel className="text-gray-500">
+            <Disclosure.Panel className="ronded-b-md bg-gray-300 p-2">
               {/* TODO: make this nice, not important now really */}
               <pre>{JSON.stringify(nutrition, null, 4)}</pre>
             </Disclosure.Panel>

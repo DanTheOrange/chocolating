@@ -1,12 +1,8 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import {
-  BUTTON_SIZES,
-  PrimaryButton,
-  SecondaryButton,
-  DangerButton,
-} from "../components/Button"
+import { BUTTON_SIZES, PrimaryButton, SecondaryButton, DangerButton } from "../components/Button"
 
+// budget storybook
 const Test: NextPage = () => (
   <>
     <Head>

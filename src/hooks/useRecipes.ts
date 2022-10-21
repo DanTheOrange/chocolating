@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import { TIngredient } from "./useIngredients"
-
+import constate from "constate"
 const LOCALSTORAGE_RECIPE_KEY = "recipes"
 
 // Some basic types until there is a backend
@@ -15,18 +15,18 @@ type TRecipe = {
   ingredients: TIngredientWithQuantity
 }
 
+export type TUseIngredients = ReturnType<typeof useRecipesHook>
+
 // For now this is localstorage,
 // as soon as I do auth and DB stuff it'll be that instead
 // Because of that it oesn't matter that this is always an instance
 // It'll only ever be in one place on the screen.
-export const useRecipes = () => {
+export const useRecipesHook = () => {
   // This doesn't need to be state, but it makes the mental gymnastics easier before there is a db
   const [recipes, setRecipes] = useState<TRecipe[]>([])
 
   useEffect(() => {
-    const localRecipes = JSON.parse(
-      localStorage.getItem(LOCALSTORAGE_RECIPE_KEY)!
-    )
+    const localRecipes = JSON.parse(localStorage.getItem(LOCALSTORAGE_RECIPE_KEY)!)
     setRecipes(localRecipes)
   }, [])
 
@@ -56,3 +56,4 @@ export const useRecipes = () => {
     recipes,
   }
 }
+export const [RecipesProvider, useRecipes] = constate(useRecipesHook)

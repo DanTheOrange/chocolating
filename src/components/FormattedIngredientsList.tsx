@@ -6,21 +6,23 @@ import {
   TIngredientCategory,
   useIngredients,
 } from "../hooks/useIngredients"
+import cn from "classnames"
+
+type TFormattedIngredientsListProps = React.ComponentProps<"ul"> & {
+  ListItem: React.FC<{ ingredient: TIngredient }>
+}
 
 export const FormattedIngredientsList = ({
   ListItem,
-}: {
-  ListItem: React.FC<{ ingredient: TIngredient }>
-}) => {
+  className,
+  ...props
+}: TFormattedIngredientsListProps) => {
   const { beans, butters, flavorings, milks, sugars } = useIngredients()
 
-  const ListMap = useMemo(() => {
-    return new Map<TIngredientCategory, { title: string; data: TIngredient[] }>(
-      [
-        [
-          "cocoa",
-          { title: IngredientCategoriesNameMap.get("cocoa")!, data: beans },
-        ],
+  const ListMap = useMemo(
+    () =>
+      new Map<TIngredientCategory, { title: string; data: TIngredient[] }>([
+        ["cocoa", { title: IngredientCategoriesNameMap.get("cocoa")!, data: beans }],
         [
           "cocoabutter",
           {
@@ -28,10 +30,7 @@ export const FormattedIngredientsList = ({
             data: butters,
           },
         ],
-        [
-          "creamer",
-          { title: IngredientCategoriesNameMap.get("creamer")!, data: milks },
-        ],
+        ["creamer", { title: IngredientCategoriesNameMap.get("creamer")!, data: milks }],
         [
           "sweetener",
           {
@@ -46,12 +45,12 @@ export const FormattedIngredientsList = ({
             data: flavorings,
           },
         ],
-      ]
-    )
-  }, [beans, butters, flavorings, milks, sugars])
+      ]),
+    [beans, butters, flavorings, milks, sugars]
+  )
 
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className={cn("flex flex-col gap-2", className)} {...props}>
       {INGREDIENT_CATEGORIES.map((category) => {
         const currentCategory = ListMap.get(category)!
 
@@ -60,7 +59,7 @@ export const FormattedIngredientsList = ({
           !!currentCategory.data.length && (
             <li key={category}>
               <p className="text-lg font-semibold">{currentCategory.title}</p>
-              <ul className="ml-2 flex flex-col gap-2">
+              <ul className="ml-2 flex flex-col gap-1">
                 {currentCategory.data.map((ingredient) => (
                   <li key={ingredient.uuid} className="flex flex-col">
                     {<ListItem ingredient={ingredient} />}
