@@ -4,7 +4,7 @@ import {
   IngredientCategoriesNameMap,
   TIngredient,
   useIngredients,
-} from "../hooks/useIngredients"
+} from "../../../hooks/useIngredients"
 
 const requiredMessage = "This field is required"
 
