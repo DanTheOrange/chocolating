@@ -31,9 +31,9 @@ export const IngredientListItem = ({
             leaveFrom="transform translate-y-0 opacity-100"
             leaveTo="transform -translate-y-full opacity-0"
           >
-            <Disclosure.Panel className="ronded-b-md bg-gray-300 p-2">
+            <Disclosure.Panel as="pre" className="rounded-b-md bg-gray-300 p-2">
               {/* TODO: make this nice, not important now really */}
-              <pre>{JSON.stringify(nutrition, null, 4)}</pre>
+              {JSON.stringify(nutrition, null, 4)}
             </Disclosure.Panel>
           </Transition>
         </div>

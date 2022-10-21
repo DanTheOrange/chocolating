@@ -19,7 +19,7 @@ const defaultElement = "button"
 
 type TButtonProps<C extends ElementType> = PolymorphicComponentPropWithRef<
   C,
-  { size?: TButtonSizes }
+  { size?: TButtonSizes; isDisabled?: boolean }
 >
 
 type TButtonComponent = <C extends React.ElementType = typeof defaultElement>(
@@ -28,7 +28,7 @@ type TButtonComponent = <C extends React.ElementType = typeof defaultElement>(
 
 const BaseButton: TButtonComponent = forwardRef(
   <C extends ElementType = typeof defaultElement>(
-    { className, size = "md", as, ...props }: TButtonProps<C>,
+    { as, className, size = "md", isDisabled = false, ...props }: TButtonProps<C>,
     ref: PolymorphicRef<C>
   ) => {
     const As = as ?? defaultElement
@@ -36,7 +36,13 @@ const BaseButton: TButtonComponent = forwardRef(
     return (
       <As
         ref={ref}
-        className={cn("rounded font-semibold", ButtonSizeMap.get(size), className)}
+        className={cn(
+          "block rounded font-semibold transition-colors",
+          { "cursor-pointer": !isDisabled, "cursor-not-allowed": isDisabled },
+          ButtonSizeMap.get(size),
+          className
+        )}
+        disabled={isDisabled}
         {...props}
       />
     )
@@ -51,7 +57,11 @@ export const PrimaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-blue-200 py-2 px-4 font-bold text-slate-800 hover:bg-blue-300",
+        "rounded bg-blue-200 py-2 px-4 font-bold text-slate-800",
+        {
+          "opacity-50": props.isDisabled,
+          "hover:bg-blue-300 active:bg-blue-400": !props.isDisabled,
+        },
         className
       )}
       {...props}
@@ -67,7 +77,11 @@ export const SecondaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-amber-100 py-2 px-4 font-bold text-slate-800 hover:bg-amber-200",
+        "rounded bg-amber-100 py-2 px-4 font-bold text-slate-800 ",
+        {
+          "opacity-50": props.isDisabled,
+          "hover:bg-amber-200 active:bg-amber-300": !props.isDisabled,
+        },
         className
       )}
       {...props}
@@ -83,7 +97,11 @@ export const DangerButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-red-600 py-2 px-4 font-bold text-white hover:bg-red-700",
+        "rounded bg-red-600 py-2 px-4 font-bold text-white",
+        {
+          "opacity-50": props.isDisabled,
+          "hover:bg-red-700 active:bg-red-800": !props.isDisabled,
+        },
         className
       )}
       {...props}

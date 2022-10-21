@@ -10,7 +10,7 @@ export const RecipeList = () => {
       <>
         <p>No recipes yet</p>
         <Link href="/recipe-creator/new">
-          <PrimaryButton as="a" className="">
+          <PrimaryButton as="a" className="w-fit">
             Make one
           </PrimaryButton>
         </Link>

@@ -2,9 +2,9 @@ import { useRouter } from "next/router"
 
 const Recipe = () => {
   const router = useRouter()
-  const { rid } = router.query
+  const { id } = router.query
 
-  return <p>Recipe: {rid}</p>
+  return <p>Recipe: {id}</p>
 }
 
 export default Recipe

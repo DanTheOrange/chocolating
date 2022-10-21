@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import Head from "next/head"
-import { RecipesProvider, useRecipes } from "hooks/useRecipes"
+import { RecipesProvider } from "hooks/useRecipes"
 import { RecipeList } from "components/pages/recipe-creator/RecipeList"
 
 const RecipeCreator: NextPage = () => (

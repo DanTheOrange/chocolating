@@ -1,5 +1,6 @@
 // Having fun testing polymorphic components.
-// not my code
+// I can't say I truely understand all of this yet, but I get the gist!
+// not my code!
 // https://github.com/ohansemmanuel/polymorphic-react-component/blob/master/06.tsx
 export type PolymorphicRef<C extends React.ElementType> = React.ComponentPropsWithRef<C>["ref"]
 
