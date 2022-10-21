@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import { v4 as uuidv4 } from "uuid"
+import constate from "constate"
 
 const LOCALSTORAGE_INGREDIENT_KEY = "ingredients"
 
 // Some basic types until there is a backend
-
-export const IngredientCategories = [
+export const INGREDIENT_CATEGORIES = [
   "cocoa",
   "cocoabutter",
   "creamer",
@@ -13,7 +13,7 @@ export const IngredientCategories = [
   "flavoring",
 ] as const
 
-export type TIngredientCategory = typeof IngredientCategories[number]
+export type TIngredientCategory = typeof INGREDIENT_CATEGORIES[number]
 
 export const IngredientCategoriesNameMap = new Map<TIngredientCategory, string>(
   [
@@ -87,9 +87,13 @@ const defaultIngredients: TIngredient[] = [
   },
 ]
 
+export type TUseIngredients = ReturnType<typeof useIngredientsHook>
+
 // For now this is localstorage,
 // as soon as I do auth and DB stuff it'll be that instead
-export const useIngredients = () => {
+// Because of that it oesn't matter that this is always an instance
+// It'll only ever be in one place on the screen.
+export const useIngredientsHook = () => {
   // This doesn't need to be state, but it makes the mental gymnastics easier before there is a db
   const [ingredients, setIngredients] = useState<TIngredient[]>([])
 
@@ -128,9 +132,9 @@ export const useIngredients = () => {
     setIngredients(newIngredients)
   }
 
-  const deleteIngredient = (removedUuid: string) => {
+  const deleteIngredient = (uuidToDelete: string) => {
     const newIngredients = ingredients.filter(
-      ({ uuid }) => uuid !== removedUuid
+      ({ uuid }) => uuid !== uuidToDelete
     )
 
     // independently set state and local storage - fine for now as temporary
@@ -143,9 +147,37 @@ export const useIngredients = () => {
     setIngredients(newIngredients)
   }
 
+  const beans = useMemo(() => {
+    return ingredients.filter(({ type }) => type === "cocoa")
+  }, [ingredients])
+
+  const butters = useMemo(() => {
+    return ingredients.filter(({ type }) => type === "cocoabutter")
+  }, [ingredients])
+
+  const sugars = useMemo(() => {
+    return ingredients.filter(({ type }) => type === "sweetener")
+  }, [ingredients])
+
+  const milks = useMemo(() => {
+    return ingredients.filter(({ type }) => type === "creamer")
+  }, [ingredients])
+
+  const flavorings = useMemo(() => {
+    return ingredients.filter(({ type }) => type === "flavoring")
+  }, [ingredients])
+
   return {
     addIngredient,
     deleteIngredient,
     ingredients,
+    beans,
+    butters,
+    sugars,
+    milks,
+    flavorings,
   }
 }
+
+export const [IngredientsProvider, useIngredients] =
+  constate(useIngredientsHook)

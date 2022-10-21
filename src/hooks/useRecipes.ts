@@ -8,6 +8,7 @@ const LOCALSTORAGE_RECIPE_KEY = "recipes"
 type TIngredientWithQuantity = TIngredient & {
   quantity: number // percentage - the ui can handle fancy grams to percentage conversions if needed
 }
+
 type TRecipe = {
   uuid: string
   name: string
@@ -16,6 +17,8 @@ type TRecipe = {
 
 // For now this is localstorage,
 // as soon as I do auth and DB stuff it'll be that instead
+// Because of that it oesn't matter that this is always an instance
+// It'll only ever be in one place on the screen.
 export const useRecipes = () => {
   // This doesn't need to be state, but it makes the mental gymnastics easier before there is a db
   const [recipes, setRecipes] = useState<TRecipe[]>([])
@@ -37,8 +40,8 @@ export const useRecipes = () => {
     setRecipes(newRecipes)
   }
 
-  const deleteRecipe = (removedUuid: string) => {
-    const newRecipes = recipes.filter(({ uuid }) => uuid !== removedUuid)
+  const deleteRecipe = (uuidToDelete: string) => {
+    const newRecipes = recipes.filter(({ uuid }) => uuid !== uuidToDelete)
 
     // independently set state and local storage - fine for now as temporary
     if (typeof window !== "undefined") {

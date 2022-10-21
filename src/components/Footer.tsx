@@ -1,8 +1,9 @@
 import { BsFillSuitHeartFill } from "react-icons/bs"
+// import { AiOutlineCopyrightCircle } from "react-icons/ai"
 
 export const Footer = () => (
-  <div className="bg-slate-800">
-    <p className="p-3 text-slate-100">
+  <div className="flex flex-row justify-between bg-slate-800 p-3 text-slate-100">
+    <p>
       Made with{" "}
       <span className="text-red-600">
         <BsFillSuitHeartFill className="inline" />
@@ -15,5 +16,10 @@ export const Footer = () => (
         DanTheOrange
       </a>
     </p>
+    {/* Do I need this? */}
+    {/* <p>
+      <AiOutlineCopyrightCircle className="-mt-1 inline" /> Daniel James Lewis
+      2022
+    </p> */}
   </div>
 )

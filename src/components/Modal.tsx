@@ -36,7 +36,7 @@ export const Modal: React.FC<{
               {title && (
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900"
+                  className="mb-4 text-lg font-medium leading-6 text-gray-900"
                 >
                   {title}
                 </Dialog.Title>
