@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react"
+import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
 import constate from "constate"
 
@@ -15,15 +15,13 @@ export const INGREDIENT_CATEGORIES = [
 
 export type TIngredientCategory = typeof INGREDIENT_CATEGORIES[number]
 
-export const IngredientCategoriesNameMap = new Map<TIngredientCategory, string>(
-  [
-    ["cocoa", "Cocoa Beans"],
-    ["cocoabutter", "Cocoa Butter"],
-    ["creamer", "Milk / Milk alternative"],
-    ["sweetener", "Sugar / Sweetener"],
-    ["flavoring", "Flavouring"],
-  ]
-)
+export const IngredientCategoriesNameMap = new Map<TIngredientCategory, string>([
+  ["cocoa", "Cocoa Beans"],
+  ["cocoabutter", "Cocoa Butter"],
+  ["creamer", "Milk / Milk alternative"],
+  ["sweetener", "Sugar / Sweetener"],
+  ["flavoring", "Flavouring"],
+])
 
 type TNutritionalInformation = {
   fat: number // percentage
@@ -98,9 +96,7 @@ export const useIngredientsHook = () => {
   const [ingredients, setIngredients] = useState<TIngredient[]>([])
 
   useEffect(() => {
-    const localIngredients = JSON.parse(
-      localStorage.getItem(LOCALSTORAGE_INGREDIENT_KEY)!
-    )
+    const localIngredients = JSON.parse(localStorage.getItem(LOCALSTORAGE_INGREDIENT_KEY)!)
     if (localIngredients.length === 0) resetToDefaultIngredients()
     else setIngredients(localIngredients)
   }, [])
@@ -108,76 +104,36 @@ export const useIngredientsHook = () => {
   const resetToDefaultIngredients = () => {
     // independently set state and local storage - fine for now as temporary
     if (typeof window !== "undefined") {
-      localStorage.setItem(
-        LOCALSTORAGE_INGREDIENT_KEY,
-        JSON.stringify(defaultIngredients)
-      )
+      localStorage.setItem(LOCALSTORAGE_INGREDIENT_KEY, JSON.stringify(defaultIngredients))
     }
     setIngredients(defaultIngredients)
   }
 
   const addIngredient = (newIngredient: Omit<TIngredient, "uuid">) => {
-    const newIngredients = [
-      ...ingredients,
-      { uuid: uuidv4(), ...newIngredient },
-    ]
+    const newIngredients = [...ingredients, { uuid: uuidv4(), ...newIngredient }]
 
     // independently set state and local storage - fine for now as temporary
     if (typeof window !== "undefined") {
-      localStorage.setItem(
-        LOCALSTORAGE_INGREDIENT_KEY,
-        JSON.stringify(newIngredients)
-      )
+      localStorage.setItem(LOCALSTORAGE_INGREDIENT_KEY, JSON.stringify(newIngredients))
     }
     setIngredients(newIngredients)
   }
 
   const deleteIngredient = (uuidToDelete: string) => {
-    const newIngredients = ingredients.filter(
-      ({ uuid }) => uuid !== uuidToDelete
-    )
+    const newIngredients = ingredients.filter(({ uuid }) => uuid !== uuidToDelete)
 
     // independently set state and local storage - fine for now as temporary
     if (typeof window !== "undefined") {
-      localStorage.setItem(
-        LOCALSTORAGE_INGREDIENT_KEY,
-        JSON.stringify(newIngredients)
-      )
+      localStorage.setItem(LOCALSTORAGE_INGREDIENT_KEY, JSON.stringify(newIngredients))
     }
     setIngredients(newIngredients)
   }
-
-  const beans = useMemo(() => {
-    return ingredients.filter(({ type }) => type === "cocoa")
-  }, [ingredients])
-
-  const butters = useMemo(() => {
-    return ingredients.filter(({ type }) => type === "cocoabutter")
-  }, [ingredients])
-
-  const sugars = useMemo(() => {
-    return ingredients.filter(({ type }) => type === "sweetener")
-  }, [ingredients])
-
-  const milks = useMemo(() => {
-    return ingredients.filter(({ type }) => type === "creamer")
-  }, [ingredients])
-
-  const flavorings = useMemo(() => {
-    return ingredients.filter(({ type }) => type === "flavoring")
-  }, [ingredients])
 
   return {
     addIngredient,
     deleteIngredient,
     ingredients,
-    beans,
-    butters,
-    sugars,
-    milks,
-    flavorings,
   }
 }
 
-export const [IngredientsProvider, useIngredients] =
-  constate(useIngredientsHook)
+export const [IngredientsProvider, useIngredients] = constate(useIngredientsHook)

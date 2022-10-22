@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { TIngredient } from "./useIngredients"
 import constate from "constate"
+
 const LOCALSTORAGE_RECIPE_KEY = "recipes"
 
 // Some basic types until there is a backend
-type TIngredientWithQuantity = TIngredient & {
+type TIngredientWithQuantity = {
+  uuid: string
   quantity: number // percentage - the ui can handle fancy grams to percentage conversions if needed
 }
 
 type TRecipe = {
   uuid: string
   name: string
-  ingredients: TIngredientWithQuantity
+  ingredients: TIngredientWithQuantity[]
 }
 
 export type TUseIngredients = ReturnType<typeof useRecipesHook>
@@ -27,11 +28,16 @@ export const useRecipesHook = () => {
 
   useEffect(() => {
     const localRecipes = JSON.parse(localStorage.getItem(LOCALSTORAGE_RECIPE_KEY)!)
-    setRecipes(localRecipes)
+    if (localRecipes?.length > 0) setRecipes(localRecipes)
   }, [])
 
-  const addRecipe = (newRecipe: Omit<TRecipe, "uuid">) => {
-    const newRecipes = [...recipes, { uuid: uuidv4(), ...newRecipe }]
+  const addRecipe = (recipeToSave: Omit<TRecipe, "uuid"> | TRecipe) => {
+    let newRecipes
+    if ("uuid" in recipeToSave)
+      newRecipes = recipes.map((recipe) =>
+        recipe.uuid === recipeToSave.uuid ? recipeToSave : recipe
+      )
+    else newRecipes = [...recipes, { uuid: uuidv4(), ...recipeToSave }]
 
     // independently set state and local storage - fine for now as temporary
     if (typeof window !== "undefined") {
