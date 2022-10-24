@@ -4,7 +4,7 @@ import cn from "classnames"
 import { Ingredients } from "@prisma/client"
 
 export const IngredientListItem = ({
-  ingredient: { id, name, type, ...nutrition },
+  ingredient: { id, name, description, type, ...nutrition },
 }: {
   ingredient: Ingredients
 }) => (
@@ -30,6 +30,7 @@ export const IngredientListItem = ({
             leaveTo="transform -translate-y-full opacity-0"
           >
             <Disclosure.Panel as="pre" className="rounded-b-md bg-gray-300 p-2">
+              {description && <p>{description}</p>}
               {/* TODO: make this nice, not important now really */}
               {JSON.stringify({ id, type, nutrition }, null, 4)}
             </Disclosure.Panel>

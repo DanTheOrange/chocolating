@@ -1,4 +1,4 @@
-import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "../hooks/useIngredients"
+import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "types/ingredients"
 import cn from "classnames"
 import { Ingredients } from "@prisma/client"
 

@@ -17,9 +17,10 @@ datasource db {
 }
 
 model Ingredients {
-    id   String @id @default(cuid())
-    name String @db.Text
-    type String @db.Text
+    id          String  @id @default(cuid())
+    name        String  @db.Text
+    type        String  @db.Text
+    description String? @db.Text
 
     fat_content   Int
     sugar_content Int

@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "hooks/useIngredients"
+import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "types/ingredients"
 import { useForm } from "react-hook-form"
 import { createIngredientSchema } from "schemas/ingredients"
 import { trpc } from "utils/trpc"
+import cn from "classnames"
 
-// type Schema = TSchema extends z.ZodType
-
+// Loosely followed this example to get schema validation working.
+// https://kitchen-sink.trpc.io/react-hook-form?file=feature%2Freact-hook-form%2Findex.tsx#content
 export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
   const utils = trpc.useContext()
   const mutate = trpc.ingredients.createIngredient.useMutation({
@@ -16,6 +17,7 @@ export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
 
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm<typeof createIngredientSchema["_input"]>({
@@ -23,14 +25,11 @@ export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
   })
 
   const onFormSubmit = handleSubmit(async (data) => {
-    await mutate.mutateAsync({
-      ...data,
-      fat_content: Number(data.fat_content),
-      sugar_content: Number(data.sugar_content),
-      calories: Number(data.calories),
-    })
+    await mutate.mutateAsync(data)
     onSubmit?.()
   })
+
+  const watchDescription = watch("description")
 
   return (
     <form onSubmit={onFormSubmit} className="flex flex-col gap-3">
@@ -50,6 +49,27 @@ export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
           ))}
         </select>
         {errors?.type && <p>{errors.type.message}</p>}
+      </div>
+
+      <div className="flex flex-col gap-0.5">
+        <label htmlFor="description">Description</label>
+        <textarea id="description" required {...register("description")} />
+        <div className="flex flex-row justify-between">
+          <p className="text-sm text-red-500">
+            {errors?.description && errors.description.message}
+          </p>
+          {watchDescription && (
+            <p
+              className={cn("self-end text-sm", {
+                "font-semibold text-amber-600":
+                  watchDescription.length >= 400 && watchDescription.length < 501,
+                "font-bold text-red-500": watchDescription.length >= 501,
+              })}
+            >
+              {watchDescription.length}/500
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col gap-0.5">
@@ -97,7 +117,7 @@ export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
           })}
         />
         {errors?.calories && <p className="text-sm text-red-500">{errors.calories.message}</p>}
-        <p className="text-sm">Calories per 100g</p>
+        <p className="text-sm">Value per 100g</p>
       </div>
 
       <input
