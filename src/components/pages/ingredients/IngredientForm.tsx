@@ -7,7 +7,7 @@ import cn from "classnames"
 
 // Loosely followed this example to get schema validation working.
 // https://kitchen-sink.trpc.io/react-hook-form?file=feature%2Freact-hook-form%2Findex.tsx#content
-export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
+export const IngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
   const utils = trpc.useContext()
   const mutate = trpc.ingredients.createIngredient.useMutation({
     onSuccess: async () => {
@@ -53,7 +53,7 @@ export const AddIngredientForm = ({ onSubmit }: { onSubmit?: () => void }) => {
 
       <div className="flex flex-col gap-0.5">
         <label htmlFor="description">Description</label>
-        <textarea id="description" required {...register("description")} />
+        <textarea id="description" {...register("description")} />
         <div className="flex flex-row justify-between">
           <p className="text-sm text-red-500">
             {errors?.description && errors.description.message}

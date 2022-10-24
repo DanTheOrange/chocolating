@@ -6,11 +6,12 @@ import { PolymorphicComponentPropWithRef, PolymorphicRef } from "types/polymorph
 // Button stuff
 type TButtonSizes = typeof BUTTON_SIZES[number]
 
-const ButtonSizeMap = new Map<TButtonSizes, string>([
+const ButtonSizeMap = new Map<TButtonSizes | "custom", string>([
   ["xs", "py-0.5 px-2 text-xs"],
   ["sm", "py-1 px-3 text-sm"],
   ["md", "py-1.5 px-4 text-md"],
   ["lg", "py-2 px-5 text-lg"],
+  ["custom", ""],
 ])
 
 export const BUTTON_SIZES = ["xs", "sm", "md", "lg"] as const
@@ -26,7 +27,7 @@ type TButtonComponent = <C extends React.ElementType = typeof defaultElement>(
   props: TButtonProps<C>
 ) => React.ReactElement | null
 
-const BaseButton: TButtonComponent = forwardRef(
+export const BaseButton: TButtonComponent = forwardRef(
   <C extends ElementType = typeof defaultElement>(
     { as, className, size = "md", isDisabled = false, ...props }: TButtonProps<C>,
     ref: PolymorphicRef<C>
@@ -57,7 +58,7 @@ export const PrimaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-blue-200 py-2 px-4 font-bold text-slate-800",
+        "rounded bg-blue-200 font-bold text-slate-800",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-blue-300 active:bg-blue-400": !props.isDisabled,
@@ -77,7 +78,7 @@ export const SecondaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-amber-100 py-2 px-4 font-bold text-slate-800 ",
+        "rounded bg-amber-100 font-bold text-slate-800 ",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-amber-200 active:bg-amber-300": !props.isDisabled,
@@ -97,7 +98,7 @@ export const DangerButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-red-600 py-2 px-4 font-bold text-white",
+        "rounded bg-red-600 font-bold text-white",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-red-700 active:bg-red-800": !props.isDisabled,

@@ -55,10 +55,13 @@ const Home: NextPage = () => (
 export default Home
 
 const Card = ({ href, img, title, info, ...props }: React.ComponentProps<"li"> & TCard) => (
-  <li className="overflow-hidden rounded-md border border-slate-400 bg-slate-100 transition-all hover:scale-105 hover:shadow-md">
+  <li
+    className="overflow-hidden rounded-md border border-slate-400 bg-slate-100 transition-all hover:scale-105 hover:shadow-md"
+    {...props}
+  >
     <Link href={href}>
       <a className="flex h-full flex-col gap-2 pb-4">
-        <div className="">
+        <div>
           <Image quality={60} src={img} />
         </div>
         <p className="mx-2 text-lg font-semibold">{title}</p>

@@ -1,4 +1,4 @@
-import { AddIngredientForm } from "components/pages/ingredients/AddIngredientForm"
+import { IngredientForm } from "components/pages/ingredients/AddIngredientForm"
 import { PrimaryButton } from "components/Button"
 import { Modal } from "components/Modal"
 import { useState } from "react"
@@ -20,7 +20,7 @@ export const AddIngredientModal = () => {
         Add ingredient
       </PrimaryButton>
       <Modal isOpen={isOpen} closeModal={closeModal} title="Add an ingredient">
-        <AddIngredientForm onSubmit={closeModal} />
+        <IngredientForm onSubmit={closeModal} />
       </Modal>
     </>
   )
