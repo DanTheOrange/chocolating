@@ -1,5 +1,5 @@
 import { PrimaryButton } from "components/Button"
-import { useRecipes } from "hooks/useRecipes"
+import { useRecipes } from "hooks/useRecipeStore"
 import Link from "next/link"
 import { v4 as uuidv4 } from "uuid"
 

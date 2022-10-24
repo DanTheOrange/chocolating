@@ -1,15 +1,13 @@
 import { Disclosure, Transition } from "@headlessui/react"
 import { BsChevronDown } from "react-icons/bs"
-import { TIngredient } from "hooks/useIngredients"
 import cn from "classnames"
-
-type TIngredientListItemProps = {
-  ingredient: TIngredient
-}
+import { Ingredients } from "@prisma/client"
 
 export const IngredientListItem = ({
-  ingredient: { name, nutrition },
-}: TIngredientListItemProps) => (
+  ingredient: { id, name, type, ...nutrition },
+}: {
+  ingredient: Ingredients
+}) => (
   <Disclosure>
     {({ open }) => (
       <>
@@ -33,7 +31,7 @@ export const IngredientListItem = ({
           >
             <Disclosure.Panel as="pre" className="rounded-b-md bg-gray-300 p-2">
               {/* TODO: make this nice, not important now really */}
-              {JSON.stringify(nutrition, null, 4)}
+              {JSON.stringify({ id, type, nutrition }, null, 4)}
             </Disclosure.Panel>
           </Transition>
         </div>

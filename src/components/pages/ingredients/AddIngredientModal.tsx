@@ -1,4 +1,4 @@
-import { AddIngredientForm } from "components/pages/ingredient-manager/AddIngredientForm"
+import { AddIngredientForm } from "components/pages/ingredients/AddIngredientForm"
 import { PrimaryButton } from "components/Button"
 import { Modal } from "components/Modal"
 import { useState } from "react"

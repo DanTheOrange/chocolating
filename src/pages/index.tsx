@@ -15,7 +15,7 @@ type TCard = {
 
 const cards: TCard[] = [
   {
-    href: "/ingredient-manager",
+    href: "/ingredients",
     img: ingredients,
     title: "Ingredient manager",
     info: "Add ingredients to use in recipe creation.",

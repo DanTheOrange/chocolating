@@ -13,7 +13,7 @@ export const Footer = () => (
         href="https://github.com/DanTheOrange"
         className="border-b border-slate-200 hover:border-blue-400 hover:text-blue-300"
       >
-        DanTheOrange
+        Daniel James Lewis
       </a>
     </p>
     {/* Do I need this? */}

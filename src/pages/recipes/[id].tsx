@@ -4,7 +4,7 @@ import {
   TFormattedIngredientsListProps,
 } from "components/FormattedIngredientsList"
 import { IngredientsProvider, TIngredient, useIngredients } from "hooks/useIngredients"
-import { RecipesProvider, useRecipes } from "hooks/useRecipes"
+import { RecipesProvider, useRecipes } from "hooks/useRecipeStore"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { useCallback, useMemo } from "react"

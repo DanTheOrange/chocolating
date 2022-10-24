@@ -1,13 +1,10 @@
-import {
-  IngredientCategoriesNameMap,
-  INGREDIENT_CATEGORIES,
-  TIngredient,
-} from "../hooks/useIngredients"
+import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "../hooks/useIngredients"
 import cn from "classnames"
+import { Ingredients } from "@prisma/client"
 
 export type TFormattedIngredientsListProps = React.ComponentProps<"ul"> & {
-  ListItem: React.FC<{ ingredient: TIngredient }>
-  ingredients: TIngredient[]
+  ListItem: React.FC<{ ingredient: Ingredients }>
+  ingredients: Ingredients[]
 }
 
 export const FormattedIngredientsList = ({
@@ -26,7 +23,7 @@ export const FormattedIngredientsList = ({
             <p className="text-lg font-semibold">{IngredientCategoriesNameMap.get(category)}</p>
             <ul className="ml-2 flex flex-col gap-1">
               {data.map((ingredient) => (
-                <li key={ingredient.uuid} className="flex flex-col">
+                <li key={ingredient.id} className="flex flex-col">
                   {<ListItem ingredient={ingredient} />}
                 </li>
               ))}

@@ -8,7 +8,11 @@ List of pages in creation order. Usually because there is a dependency of data
 - [] chocolate recipe tool
 - [] batch size calculator
 
-## Investigation
+## Hosting and services
+
+- Planetscale
+  - Connect to db with `pscale connect {project} {branch} --port 3309`
+- Vercel (Soon)
 
 ### Nutrition APIs
 
