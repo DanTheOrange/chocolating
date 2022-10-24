@@ -16,7 +16,7 @@ datasource db {
     referentialIntegrity = "prisma"
 }
 
-model Ingredients {
+model Ingredient {
     id          String  @id @default(cuid())
     name        String  @db.Text
     type        String  @db.Text
@@ -25,6 +25,28 @@ model Ingredients {
     fat_content   Int
     sugar_content Int
     calories      Int
+
+    recipes IngredientsInRecipe[]
+}
+
+model Recipe {
+    id                    String  @id @default(cuid())
+    name                  String? @db.Text
+    generated_name        String  @db.Text
+    description           String? @db.Text
+    generated_description String  @db.Text
+
+    ingredients IngredientsInRecipe[]
+}
+
+model IngredientsInRecipe {
+    recipe       Recipe     @relation(fields: [recipeId], references: [id])
+    recipeId     String
+    ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+    ingredientId String
+    quantity     Int
+
+    @@id([recipeId, ingredientId])
 }
 
 // Necessary for Next auth
