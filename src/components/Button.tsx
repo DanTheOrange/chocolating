@@ -23,11 +23,12 @@ type TButtonProps<C extends ElementType> = PolymorphicComponentPropWithRef<
   { size?: TButtonSizes; isDisabled?: boolean }
 >
 
-type TButtonComponent = <C extends React.ElementType = typeof defaultElement>(
-  props: TButtonProps<C>
-) => React.ReactElement | null
+// TODO: implement this
+// type TButtonComponent = <C extends React.ElementType = typeof defaultElement>(
+//   props: TButtonProps<C>
+// ) => React.ReactElement | null
 
-export const BaseButton: TButtonComponent = forwardRef(
+export const BaseButton = forwardRef(
   <C extends ElementType = typeof defaultElement>(
     { as, className, size = "md", isDisabled = false, ...props }: TButtonProps<C>,
     ref: PolymorphicRef<C>
@@ -50,6 +51,8 @@ export const BaseButton: TButtonComponent = forwardRef(
   }
 )
 
+BaseButton.displayName = "BaseButton"
+
 export const PrimaryButton = forwardRef(
   <C extends ElementType = typeof defaultElement>(
     { className, ...props }: TButtonProps<C>,
@@ -69,6 +72,8 @@ export const PrimaryButton = forwardRef(
     />
   )
 )
+
+PrimaryButton.displayName = "PrimaryButton"
 
 export const SecondaryButton = forwardRef(
   <C extends ElementType = typeof defaultElement>(
@@ -90,6 +95,8 @@ export const SecondaryButton = forwardRef(
   )
 )
 
+SecondaryButton.displayName = "SecondaryButton"
+
 export const NeutralButton = forwardRef(
   <C extends ElementType = typeof defaultElement>(
     { className, ...props }: TButtonProps<C>,
@@ -110,6 +117,8 @@ export const NeutralButton = forwardRef(
   )
 )
 
+NeutralButton.displayName = "NeutralButton"
+
 export const DangerButton = forwardRef(
   <C extends ElementType = typeof defaultElement>(
     { className, ...props }: TButtonProps<C>,
@@ -129,3 +138,5 @@ export const DangerButton = forwardRef(
     />
   )
 )
+
+DangerButton.displayName = "DangerButton"

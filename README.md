@@ -4,9 +4,13 @@
 
 List of pages in creation order. Usually because there is a dependency of data
 
-- [] indredients management page
+- [x] indredients management page
 - [] chocolate recipe tool
 - [] batch size calculator
+
+## Tools to consider
+
+- Contenvional commits
 
 ## Hosting and services
 

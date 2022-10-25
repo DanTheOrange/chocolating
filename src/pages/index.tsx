@@ -8,7 +8,7 @@ import scales from "../../public/scales.webp"
 
 type TCard = {
   href: string
-  img: StaticImageData
+  img: { src: StaticImageData; alt?: string }
   title: string
   info?: string
 }
@@ -16,19 +16,25 @@ type TCard = {
 const cards: TCard[] = [
   {
     href: "/ingredients",
-    img: ingredients,
+    img: {
+      src: ingredients,
+    },
     title: "Ingredient manager",
     info: "Add ingredients to use in recipe creation.",
   },
   {
     href: "/recipes",
-    img: recipes,
+    img: {
+      src: recipes,
+    },
     title: "Recipe creator",
     info: "Formulate a chocolate recipe. Figure out tempering viability, percentage and chocolate type.",
   },
   {
     href: "#",
-    img: scales,
+    img: {
+      src: scales,
+    },
     title: "Batch calculator",
   },
 ]
@@ -62,7 +68,7 @@ const Card = ({ href, img, title, info, ...props }: React.ComponentProps<"li"> &
     <Link href={href}>
       <a className="flex h-full flex-col gap-2 pb-4">
         <div>
-          <Image quality={60} src={img} />
+          <Image quality={60} alt="" {...img} />
         </div>
         <p className="mx-2 text-lg font-semibold">{title}</p>
         {info && <p className="mx-2">{info}</p>}

@@ -1,17 +1,18 @@
 // This is just tailwind forms with minor changes...
-
+// @ts-expect-error: this is fine, but I can't ignore the file...
 const svgToDataUri = require("mini-svg-data-uri")
+// @ts-expect-error: this is fine, but I can't ignore the file...
 const plugin = require("tailwindcss/plugin")
+// @ts-expect-error: this is fine, but I can't ignore the file...
 const defaultTheme = require("tailwindcss/defaultTheme")
+// @ts-expect-error: this is fine, but I can't ignore the file...
 const colors = require("tailwindcss/colors")
-const [baseFontSize, { lineHeight: baseLineHeight }] =
-  defaultTheme.fontSize.base
+const [baseFontSize, { lineHeight: baseLineHeight }] = defaultTheme.fontSize.base
 const { spacing, borderWidth, borderRadius } = defaultTheme
 
 const forms = plugin.withOptions(function (options = { strategy: undefined }) {
   return function ({ addBase, addComponents, theme }) {
-    const strategy =
-      options.strategy === undefined ? ["base", "class"] : [options.strategy]
+    const strategy = options.strategy === undefined ? ["base", "class"] : [options.strategy]
 
     const rules = [
       {
@@ -32,12 +33,7 @@ const forms = plugin.withOptions(function (options = { strategy: undefined }) {
           "textarea",
           "select",
         ],
-        class: [
-          ".form-input",
-          ".form-textarea",
-          ".form-select",
-          ".form-multiselect",
-        ],
+        class: [".form-input", ".form-textarea", ".form-select", ".form-multiselect"],
         styles: {
           appearance: "none",
           "background-color": theme("colors.gray.100", colors.gray[100]),
@@ -262,14 +258,8 @@ const forms = plugin.withOptions(function (options = { strategy: undefined }) {
         },
       },
       {
-        base: [
-          `[type='checkbox']:indeterminate:hover`,
-          `[type='checkbox']:indeterminate:focus`,
-        ],
-        class: [
-          ".form-checkbox:indeterminate:hover",
-          ".form-checkbox:indeterminate:focus",
-        ],
+        base: [`[type='checkbox']:indeterminate:hover`, `[type='checkbox']:indeterminate:focus`],
+        class: [".form-checkbox:indeterminate:hover", ".form-checkbox:indeterminate:focus"],
         styles: {
           "border-color": "transparent",
           "background-color": "currentColor",
@@ -292,10 +282,7 @@ const forms = plugin.withOptions(function (options = { strategy: undefined }) {
         base: [`[type='file']:focus`],
         class: null,
         styles: {
-          outline: [
-            `1px solid ButtonText`,
-            `1px auto -webkit-focus-ring-color`,
-          ],
+          outline: [`1px solid ButtonText`, `1px auto -webkit-focus-ring-color`],
         },
       },
     ]

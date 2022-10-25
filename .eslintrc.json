@@ -4,5 +4,11 @@
     "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
-  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"]
+  "extends": ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "rules": {
+    // this is all because of one file src/files/forms.js
+    // it won't exclude
+    // it won't ignore
+    "@typescript-eslint/no-var-requires": "off"
+  }
 }

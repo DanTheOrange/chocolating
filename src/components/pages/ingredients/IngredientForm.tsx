@@ -56,7 +56,7 @@ export const IngredientForm = <T extends Ingredient | undefined>({
     handleSubmit,
     formState: { errors },
   } = useForm<CreateOrUpdate<T>>({
-    // @ts-ignore: technically Ingredient and typeof updateIngredientSchema["_input"] are different somehow
+    // @ts-expect-error: technically Ingredient and typeof updateIngredientSchema["_input"] are different somehow
     defaultValues,
     resolver: zodResolver(
       defaultValues ? updateIngredientSchema : createIngredientSchema,
@@ -65,34 +65,34 @@ export const IngredientForm = <T extends Ingredient | undefined>({
   })
 
   const onFormSubmit = handleSubmit(async (data) => {
-    // @ts-ignore: this is an odd one too. It'll only have id if it's in the form.
+    // @ts-expect-error: this is an odd one too. It'll only have id if it's in the form.
     await mutate.mutateAsync(data)
     onSubmit?.()
   })
 
-  // @ts-ignore: pretty sure this is a react-hook-form type problem
+  // @ts-expect-error: pretty sure this is a react-hook-form type problem
   const watchDescription = watch("description")
 
   return (
     <form onSubmit={onFormSubmit} className="flex flex-col gap-3">
       <div className="flex flex-col gap-0.5">
         <label htmlFor="name">Name</label>
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         <input type="text" id="name" required {...register("name")} />
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         {errors?.name && <p className="text-sm text-red-500">{errors.name.message}</p>}
       </div>
 
       {defaultValues && (
         <div className="hidden">
-          {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+          {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
           <input type="text" id="id" required {...register("id")} />
         </div>
       )}
 
       <div className="flex flex-col gap-0.5">
         <label htmlFor="type">Type</label>
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem> */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem> */}
         <select id="type" {...register("type")}>
           {INGREDIENT_CATEGORIES.map((category) => (
             <option value={category} key={category}>
@@ -100,17 +100,17 @@ export const IngredientForm = <T extends Ingredient | undefined>({
             </option>
           ))}
         </select>
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         {errors?.type && <p>{errors.type.message}</p>}
       </div>
 
       <div className="flex flex-col gap-0.5">
         <label htmlFor="description">Description</label>
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         <textarea id="description" {...register("description")} />
         <div className="flex flex-row justify-between">
           <p className="text-sm text-red-500">
-            {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+            {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
             {errors?.description && errors.description.message}
           </p>
           {watchDescription && (
@@ -135,13 +135,13 @@ export const IngredientForm = <T extends Ingredient | undefined>({
           max={100}
           id="fat_content"
           required
-          // @ts-ignore: pretty sure this is a react-hook-form type problem
+          // @ts-expect-error: pretty sure this is a react-hook-form type problem
           {...register("fat_content", {
             valueAsNumber: true,
           })}
         />
         {errors?.fat_content && (
-          // @ts-ignore: pretty sure this is a react-hook-form type problem
+          // @ts-expect-error: pretty sure this is a react-hook-form type problem
           <p className="text-sm text-red-500">{errors.fat_content.message}</p>
         )}
       </div>
@@ -154,13 +154,13 @@ export const IngredientForm = <T extends Ingredient | undefined>({
           max={100}
           id="sugar_content"
           required
-          // @ts-ignore: pretty sure this is a react-hook-form type problem
+          // @ts-expect-error: pretty sure this is a react-hook-form type problem
           {...register("sugar_content", {
             valueAsNumber: true,
           })}
         />
         {errors?.sugar_content && (
-          // @ts-ignore: pretty sure this is a react-hook-form type problem
+          // @ts-expect-error: pretty sure this is a react-hook-form type problem
           <p className="text-sm text-red-500">{errors.sugar_content.message}</p>
         )}
       </div>
@@ -171,12 +171,12 @@ export const IngredientForm = <T extends Ingredient | undefined>({
           type="number"
           id="calories"
           required
-          // @ts-ignore: pretty sure this is a react-hook-form type problem
+          // @ts-expect-error: pretty sure this is a react-hook-form type problem
           {...register("calories", {
             valueAsNumber: true,
           })}
         />
-        {/* @ts-ignore: pretty sure this is a react-hook-form type problem */}
+        {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         {errors?.calories && <p className="text-sm text-red-500">{errors.calories.message}</p>}
         <p className="text-sm">Value per 100g</p>
       </div>

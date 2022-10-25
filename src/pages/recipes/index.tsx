@@ -1,7 +1,6 @@
+import { ChocolateBar } from "components/pages/recipes/ChocolateBar"
 import type { NextPage } from "next"
 import Head from "next/head"
-import { RecipeList } from "components/pages/recipes/RecipeList"
-import { ChocolateBar } from "components/pages/recipes/ChocolateBar"
 
 const RecipeCreator: NextPage = () => (
   <>

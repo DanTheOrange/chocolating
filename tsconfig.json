@@ -18,5 +18,11 @@
     "baseUrl": "src"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs"],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    // this is an odd module, no need to lint
+    // why cam't I ignore this file?
+    "src/styles/forms.js"
+  ],
+  "composite": true
 }
