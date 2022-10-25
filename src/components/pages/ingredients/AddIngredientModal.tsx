@@ -1,7 +1,8 @@
-import { IngredientForm } from "components/pages/ingredients/AddIngredientForm"
+import { IngredientForm } from "components/pages/ingredients/IngredientForm"
 import { PrimaryButton } from "components/Button"
 import { Modal } from "components/Modal"
 import { useState } from "react"
+import { createIngredientSchema } from "schemas/ingredients"
 
 export const AddIngredientModal = () => {
   let [isOpen, setIsOpen] = useState(false)
@@ -20,7 +21,10 @@ export const AddIngredientModal = () => {
         Add ingredient
       </PrimaryButton>
       <Modal isOpen={isOpen} closeModal={closeModal} title="Add an ingredient">
-        <IngredientForm onSubmit={closeModal} />
+        <IngredientForm
+          onSubmit={closeModal}
+          // schema={createIngredientSchema}
+        />
       </Modal>
     </>
   )

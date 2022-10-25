@@ -1,4 +1,5 @@
 import { createProxySSGHelpers } from "@trpc/react/ssg"
+import { IngredientForm } from "components/pages/ingredients/IngredientForm"
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
 import Head from "next/head"
 import { createContextInner } from "server/trpc/context"
@@ -15,7 +16,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ id
 
   const id = context.params?.id as string
 
-  await ssg.ingredients.byId.prefetch({ id })
+  await ssg.ingredients.getById.prefetch({ id })
 
   return {
     props: {
@@ -26,8 +27,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext<{ id
 }
 
 const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { data } = trpc.ingredients.byId.useQuery({ id })
-  console.log(id, data)
+  const { data } = trpc.ingredients.getById.useQuery({ id })
+
   return (
     <>
       <Head>
@@ -36,7 +37,10 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
 
       <div className="m-10 flex flex-col gap-4">
         <h1 className="text-3xl">Edit Ingredient</h1>
-        <pre>{JSON.stringify(data, null, 4)}</pre>
+        <div className="max-w-xl rounded-md bg-slate-300 p-8">
+          {data && <IngredientForm defaultValues={data} />}
+        </div>
+        {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
       </div>
     </>
   )

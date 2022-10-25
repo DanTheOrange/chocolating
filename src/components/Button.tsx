@@ -58,10 +58,10 @@ export const PrimaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-blue-200 font-bold text-slate-800",
+        "rounded bg-blue-300 font-bold text-slate-800",
         {
           "opacity-50": props.isDisabled,
-          "hover:bg-blue-300 active:bg-blue-400": !props.isDisabled,
+          "hover:bg-blue-400 active:bg-blue-500": !props.isDisabled,
         },
         className
       )}
@@ -78,10 +78,30 @@ export const SecondaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-amber-100 font-bold text-slate-800 ",
+        "rounded bg-amber-200 font-bold text-slate-800 ",
         {
           "opacity-50": props.isDisabled,
-          "hover:bg-amber-200 active:bg-amber-300": !props.isDisabled,
+          "hover:bg-amber-300 active:bg-amber-400": !props.isDisabled,
+        },
+        className
+      )}
+      {...props}
+    />
+  )
+)
+
+export const NeutralButton = forwardRef(
+  <C extends ElementType = typeof defaultElement>(
+    { className, ...props }: TButtonProps<C>,
+    ref: PolymorphicRef<C>
+  ) => (
+    <BaseButton
+      ref={ref}
+      className={cn(
+        "rounded bg-stone-300 font-bold text-slate-800",
+        {
+          "opacity-50": props.isDisabled,
+          "hover:bg-stone-400 active:bg-stone-500": !props.isDisabled,
         },
         className
       )}

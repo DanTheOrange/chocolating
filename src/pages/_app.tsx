@@ -17,7 +17,13 @@ const MyApp: AppType<{ session: Session | null }> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Component {...pageProps} />
-      <Toaster />
+      <Toaster
+        position="bottom-left"
+        reverseOrder={true}
+        containerStyle={{
+          bottom: 60,
+        }}
+      />
     </SessionProvider>
   )
 }

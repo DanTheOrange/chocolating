@@ -1,10 +1,17 @@
-import { BUTTON_SIZES, PrimaryButton, SecondaryButton, DangerButton } from "components/Button"
+import {
+  BUTTON_SIZES,
+  PrimaryButton,
+  SecondaryButton,
+  NeutralButton,
+  DangerButton,
+} from "components/Button"
 import toast from "react-hot-toast"
 import { Fragment } from "react"
 
 const buttonTypes = [
   { buttonType: "Primary", Component: PrimaryButton },
   { buttonType: "Secondary", Component: SecondaryButton },
+  { buttonType: "Neutral", Component: NeutralButton },
   { buttonType: "Danger", Component: DangerButton },
 ]
 
