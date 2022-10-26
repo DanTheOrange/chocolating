@@ -61,10 +61,10 @@ export const PrimaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-blue-300 font-bold text-slate-800",
+        "rounded bg-blue-600 font-bold text-slate-100",
         {
           "opacity-50": props.isDisabled,
-          "hover:bg-blue-400 active:bg-blue-500": !props.isDisabled,
+          "hover:bg-blue-700 active:bg-blue-800": !props.isDisabled,
         },
         className
       )}
@@ -83,10 +83,11 @@ export const SecondaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-amber-200 font-bold text-slate-800 ",
+        "-m-px rounded border border-blue-500 font-bold text-slate-800",
         {
           "opacity-50": props.isDisabled,
-          "hover:bg-amber-300 active:bg-amber-400": !props.isDisabled,
+          "hover:border-blue-700 hover:bg-blue-200 active:border-blue-800 active:bg-blue-300":
+            !props.isDisabled,
         },
         className
       )}
@@ -105,10 +106,10 @@ export const NeutralButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-stone-300 font-bold text-slate-800",
+        "rounded bg-stone-600 font-bold text-slate-100",
         {
           "opacity-50": props.isDisabled,
-          "hover:bg-stone-400 active:bg-stone-500": !props.isDisabled,
+          "hover:bg-stone-700 active:bg-stone-800": !props.isDisabled,
         },
         className
       )}
