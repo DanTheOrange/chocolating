@@ -11,10 +11,13 @@ export const IngredientSelector = () => {
     return data?.map(({ id, name }) => ({ value: id, label: name }))
   }, [data])
 
-  const onChange = useCallback((_: MultiValue<any>, { option, removedValue }: ActionMeta<any>) => {
-    if (option) addIngredient(option.value)
-    if (removedValue) removeIngredient(removedValue.value)
-  }, [])
+  const onChange = useCallback(
+    (_: MultiValue<any>, { option, removedValue }: ActionMeta<any>) => {
+      if (option) addIngredient(option.value)
+      if (removedValue) removeIngredient(removedValue.value)
+    },
+    [addIngredient, removeIngredient]
+  )
 
   return (
     <Select

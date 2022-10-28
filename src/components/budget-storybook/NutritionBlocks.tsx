@@ -43,7 +43,7 @@ export const NutritionBlocks = () => (
             calories: 100,
           },
         ]}
-        IngredientsInRecipe={[
+        ingredientsInRecipe={[
           {
             ingredientId: "1",
             recipeId: "1",

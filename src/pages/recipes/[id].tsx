@@ -2,6 +2,7 @@ import { createProxySSGHelpers } from "@trpc/react/ssg"
 import { Layout } from "components/Layout"
 import { IngredientSelector } from "components/pages/recipes/IngredientSelector"
 import { IngredientsList } from "components/pages/recipes/IngredientsList"
+import { RecipeNutritionBlock } from "components/pages/recipes/RecipeNutritionBlock"
 import { SaveButton } from "components/pages/recipes/SaveButton"
 import { useRecipeStore } from "hooks/useRecipeStore"
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
@@ -43,7 +44,7 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
     }
   )
 
-  const { recipe, saved, updateRecipe } = useRecipeStore()
+  const { recipe, ingredients, saved, updateRecipe } = useRecipeStore()
 
   // data dependency updates once on page load so zustand has the recipe
   // saved updates from there
@@ -64,7 +65,10 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
           <SaveButton refetch={refetch} />
           <IngredientSelector />
           <IngredientsList />
+          <RecipeNutritionBlock />
           <pre>{JSON.stringify(data, null, 4)}</pre>
+          <pre>{JSON.stringify(recipe, null, 4)}</pre>
+          <pre>{JSON.stringify(ingredients, null, 4)}</pre>
         </main>
       </Layout>
     </>

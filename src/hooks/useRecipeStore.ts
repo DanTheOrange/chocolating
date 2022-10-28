@@ -1,5 +1,4 @@
 import { IngredientsInRecipe, Recipe } from "@prisma/client"
-import { UseTRPCQueryResult } from "@trpc/react/shared"
 import { updateRecipeSchema } from "schemas/recipes"
 import create from "zustand"
 
