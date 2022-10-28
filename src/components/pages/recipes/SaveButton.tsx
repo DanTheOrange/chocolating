@@ -9,7 +9,9 @@ export const SaveButton = ({ refetch }: { refetch: () => void }) => {
   const { isDirty, recipe } = useRecipeStore()
   const utils = trpc.useContext()
 
-  const { mutate, isLoading } = trpc.recipes.updateRecipe.useMutation({
+  console.log(isDirty)
+
+  const updateRecipe = trpc.recipes.updateRecipe.useMutation({
     onSuccess: async () => {
       toast.success("Updated successfully!")
       await utils.recipes.invalidate()
@@ -19,16 +21,20 @@ export const SaveButton = ({ refetch }: { refetch: () => void }) => {
   })
 
   const onClick: () => void = useCallback(() => {
-    mutate(recipe)
-  }, [mutate, recipe])
+    updateRecipe.mutate(recipe)
+  }, [updateRecipe.mutate, recipe])
 
   return (
     <PrimaryButton
       className="flex w-32 justify-center"
-      disabled={isLoading || !isDirty}
+      isDisabled={!isDirty || updateRecipe.isLoading}
       onClick={onClick}
     >
-      {isLoading ? <ImSpinner2 className="animate-spin text-2xl text-inherit" /> : "Save"}
+      {updateRecipe.isLoading ? (
+        <ImSpinner2 className="animate-spin text-2xl text-inherit" />
+      ) : (
+        "Save"
+      )}
     </PrimaryButton>
   )
 }

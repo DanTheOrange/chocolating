@@ -4,18 +4,24 @@ import { useCallback, useMemo } from "react"
 import { useRecipeStore } from "hooks/useRecipeStore"
 
 export const IngredientSelector = () => {
-  const { addIngredient, removeIngredient } = useRecipeStore()
+  const { ingredients, addIngredient, removeIngredient, resetIngredeients } = useRecipeStore()
   const { data } = trpc.ingredients.getAll.useQuery()
 
   const ingredientOptions = useMemo(() => {
     return data?.map(({ id, name }) => ({ value: id, label: name }))
   }, [data])
 
+  const defaultValues = useMemo(() => {
+    return ingredientOptions?.filter(
+      ({ value }) => !!ingredients.find(({ ingredientId }) => ingredientId === value)
+    )
+  }, [ingredientOptions, ingredients])
+
   const onChange = useCallback(
-    (_: MultiValue<any>, { option, removedValue }: ActionMeta<any>) => {
+    (_: MultiValue<any>, { action, option, removedValue }: ActionMeta<any>) => {
       if (option) addIngredient(option.value)
       if (removedValue) removeIngredient(removedValue.value)
-      // TODO: clear all action
+      if (action === "clear") resetIngredeients()
     },
     [addIngredient, removeIngredient]
   )
@@ -24,6 +30,7 @@ export const IngredientSelector = () => {
     <Select
       id="add-ingredient-select"
       instanceId="add-ingredient-select"
+      defaultValue={defaultValues}
       isMulti
       name="ingredients"
       options={ingredientOptions}

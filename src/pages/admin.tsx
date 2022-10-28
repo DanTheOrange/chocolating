@@ -58,7 +58,7 @@ const DEFAULT_INGREDIENTS: Omit<Ingredient, "description">[] = [
   {
     id: cuid(),
     name: "Default Cane Sugar",
-    category: IngredientCategory.COCOA_BEAN,
+    category: IngredientCategory.SUGAR,
     fat_content: 0,
     sugar_content: 100,
     calories: 387,

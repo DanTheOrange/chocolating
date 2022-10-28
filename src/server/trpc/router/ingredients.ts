@@ -31,4 +31,11 @@ export const ingredientsRouter = router({
       data: input,
     })
   }),
+  deleteIngredient: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.ingredient.delete({
+        where: input,
+      })
+    }),
 })

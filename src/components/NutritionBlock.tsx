@@ -38,7 +38,7 @@ export const NutritionBlock = ({ ingredients, ingredientsInRecipe }: NutritionBl
   }, [ingredients, ingredientsInRecipe])
 
   return (
-    <section className="border-2 border-black bg-white p-2">
+    <section className="h-fit border-2 border-black bg-white p-2">
       <h2 className="text-3xl font-bold tracking-tight">Nutrition Facts</h2>
       <p>Serving size (100g)</p>
       <hr className="my-2 h-2 border-none bg-black" />

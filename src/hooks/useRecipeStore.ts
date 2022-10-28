@@ -20,6 +20,7 @@ type RecipeStore = {
   addIngredient: (ingredientId: string) => void
   removeIngredient: (ingredientId: string) => void
   updateIngredientQuantity: (ingredientId: string, quantity: number) => void
+  resetIngredeients: () => void
   saved: () => void
 }
 
@@ -56,5 +57,6 @@ export const useRecipeStore = create<RecipeStore>((set) => ({
         ingredient.ingredientId === ingredientId ? { ...ingredient, quantity } : ingredient
       ),
     })),
+  resetIngredeients: () => set({ ingredients: [] }),
   saved: () => set({ isDirty: false, lastSaved: new Date().toDateString() }),
 }))

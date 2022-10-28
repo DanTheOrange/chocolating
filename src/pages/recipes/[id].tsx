@@ -2,6 +2,7 @@ import { createProxySSGHelpers } from "@trpc/react/ssg"
 import { Layout } from "components/Layout"
 import { IngredientSelector } from "components/pages/recipes/IngredientSelector"
 import { IngredientsList } from "components/pages/recipes/IngredientsList"
+import { RecipeInformation } from "components/pages/recipes/RecipeInformation"
 import { RecipeNutritionBlock } from "components/pages/recipes/RecipeNutritionBlock"
 import { SaveButton } from "components/pages/recipes/SaveButton"
 import { useRecipeStore } from "hooks/useRecipeStore"
@@ -61,10 +62,13 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
         <header className="mx-10 mt-12">
           <h1 className="text-3xl">Recipe Creator</h1>
         </header>
-        <main className="mx-10 flex flex-grow flex-col gap-4">
-          <SaveButton refetch={refetch} />
-          <IngredientSelector />
-          <IngredientsList />
+        <main className="mx-10 grid flex-grow gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="flex flex-col gap-4">
+            <SaveButton refetch={refetch} />
+            <IngredientSelector />
+            <IngredientsList />
+          </div>
+          <RecipeInformation />
           <RecipeNutritionBlock />
           {/* <pre>{JSON.stringify(data, null, 4)}</pre>
           <pre>{JSON.stringify(recipe, null, 4)}</pre>
