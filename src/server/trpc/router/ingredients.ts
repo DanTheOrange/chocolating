@@ -27,7 +27,7 @@ export const ingredientsRouter = router({
   }),
   updateIngredient: publicProcedure.input(updateIngredientSchema).mutation(({ ctx, input }) => {
     return ctx.prisma.ingredient.update({
-      where: { id: input.id },
+      where: input,
       data: input,
     })
   }),

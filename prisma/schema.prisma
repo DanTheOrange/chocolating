@@ -16,11 +16,19 @@ datasource db {
     referentialIntegrity = "prisma"
 }
 
+enum IngredientCategory {
+    COCOA_BEAN
+    COCOA_BUTTER
+    SUGAR
+    MILK
+    FLAVOURING
+}
+
 model Ingredient {
-    id          String  @id @default(cuid())
-    name        String  @db.Text
-    type        String  @db.Text
-    description String? @db.Text
+    id          String             @id @default(cuid())
+    name        String             @db.Text
+    category    IngredientCategory @default(COCOA_BEAN)
+    description String?            @db.Text
 
     fat_content   Int
     sugar_content Int
@@ -29,12 +37,16 @@ model Ingredient {
     recipes IngredientsInRecipe[]
 }
 
+// I will later model the nutrients better, not just three or four very basic things on the ingredient
+// Maybe a table of NutritionFacts with (id, type enum, quantity, measurement?)
+// type might be a seperate model with (id, name, measurement?)
+
 model Recipe {
     id                    String  @id @default(cuid())
-    name                  String? @db.Text
-    generated_name        String  @db.Text
+    name                  String  @db.Text
+    generated_name        String? @db.Text
     description           String? @db.Text
-    generated_description String  @db.Text
+    generated_description String? @db.Text
 
     ingredients IngredientsInRecipe[]
 }

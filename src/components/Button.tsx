@@ -61,7 +61,7 @@ export const PrimaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-blue-600 font-bold text-slate-100",
+        "rounded bg-blue-600 text-slate-100",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-blue-700 active:bg-blue-800": !props.isDisabled,
@@ -83,7 +83,7 @@ export const SecondaryButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "-m-px rounded border border-blue-500 font-bold text-slate-800",
+        "-m-px rounded border border-blue-500 text-slate-800",
         {
           "opacity-50": props.isDisabled,
           "hover:border-blue-700 hover:bg-blue-200 active:border-blue-800 active:bg-blue-300":
@@ -106,7 +106,7 @@ export const NeutralButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-stone-600 font-bold text-slate-100",
+        "rounded bg-stone-600 text-slate-100",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-stone-700 active:bg-stone-800": !props.isDisabled,
@@ -128,7 +128,7 @@ export const DangerButton = forwardRef(
     <BaseButton
       ref={ref}
       className={cn(
-        "rounded bg-red-600 font-bold text-white",
+        "rounded bg-red-600 text-white",
         {
           "opacity-50": props.isDisabled,
           "hover:bg-red-700 active:bg-red-800": !props.isDisabled,

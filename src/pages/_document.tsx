@@ -1,5 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document"
-import { Footer } from "components/Footer"
+import { Head, Html, Main, NextScript } from "next/document"
 
 export default function Document() {
   return (
@@ -10,10 +9,7 @@ export default function Document() {
         <link type="image/png" sizes="96x96" rel="icon" href="/favicon.png" />
       </Head>
       <body className="flex min-h-screen flex-col bg-slate-200">
-        <div className="flex-grow">
-          <Main />
-        </div>
-        <Footer />
+        <Main />
         <NextScript />
       </body>
     </Html>

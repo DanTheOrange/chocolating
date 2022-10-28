@@ -6,7 +6,7 @@ import Link from "next/link"
 import { PrimaryButton } from "components/Button"
 
 export const IngredientListItem = ({
-  ingredient: { id, name, description, type, ...nutrition },
+  ingredient: { id, name, description, category, ...nutrition },
 }: {
   ingredient: Ingredient
 }) => (
@@ -35,12 +35,12 @@ export const IngredientListItem = ({
               <Disclosure.Panel as="pre" className="rounded-b-md bg-gray-300 p-2">
                 {description && <p>{description}</p>}
                 {/* TODO: make this nice, not important now really */}
-                {JSON.stringify({ id, type, nutrition }, null, 4)}
+                {JSON.stringify({ id, category, nutrition }, null, 4)}
               </Disclosure.Panel>
             </Transition>
           </div>
         </div>
-        <Link href={`/ingredients/${id}`}>
+        <Link href={`/ingredients/${id}`} passHref>
           <PrimaryButton as="a" size="custom" className="text-normal h-fit px-2">
             Edit
           </PrimaryButton>

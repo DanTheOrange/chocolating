@@ -1,10 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import { IngredientCategoriesNameMap, INGREDIENT_CATEGORIES } from "types/ingredients"
+import { IngredientCategoriesNameMap } from "types/ingredients"
 import { useForm } from "react-hook-form"
 import { createIngredientSchema, updateIngredientSchema } from "schemas/ingredients"
 import { trpc } from "utils/trpc"
 import cn from "classnames"
-import { Ingredient } from "@prisma/client"
+import { Ingredient, IngredientCategory } from "@prisma/client"
 import { PrimaryButton } from "components/Button"
 import { ImSpinner2 } from "react-icons/im"
 import toast from "react-hot-toast"
@@ -47,7 +47,7 @@ export const IngredientForm = <T extends Ingredient | undefined>({
           toast.success("Created successfully!")
           await utils.ingredients.invalidate()
         },
-        onError: () => toast.error("Update failed!"),
+        onError: () => toast.error("Create failed!"),
       })
 
   const {
@@ -94,11 +94,13 @@ export const IngredientForm = <T extends Ingredient | undefined>({
         <label htmlFor="type">Type</label>
         {/* @ts-expect-error: pretty sure this is a react-hook-form type problem> */}
         <select id="type" {...register("type")}>
-          {INGREDIENT_CATEGORIES.map((category) => (
-            <option value={category} key={category}>
-              {IngredientCategoriesNameMap.get(category)}
-            </option>
-          ))}
+          {Object.entries(IngredientCategory)
+            .map(([_, v]) => v)
+            .map((category) => (
+              <option value={category} key={category}>
+                {IngredientCategoriesNameMap.get(category)}
+              </option>
+            ))}
         </select>
         {/* @ts-expect-error: pretty sure this is a react-hook-form type problem */}
         {errors?.type && <p>{errors.type.message}</p>}

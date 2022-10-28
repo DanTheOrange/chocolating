@@ -1,6 +1,7 @@
 import { createProxySSGHelpers } from "@trpc/react/ssg"
+import { Layout } from "components/Layout"
 import { IngredientForm } from "components/pages/ingredients/IngredientForm"
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
+import type { GetServerSidePropsContext, InferGetServerSidePropsType } from "next"
 import Head from "next/head"
 import { createContextInner } from "server/trpc/context"
 import { appRouter } from "server/trpc/router"
@@ -32,16 +33,19 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
   return (
     <>
       <Head>
-        <title>Chocolating - Recipe Creator</title>
+        <title>Chocolating - Edit Ingredient</title>
       </Head>
-
-      <div className="m-10 flex flex-col gap-4">
-        <h1 className="text-3xl">Edit Ingredient</h1>
-        <div className="max-w-xl rounded-md bg-slate-300 p-8">
-          {data && <IngredientForm defaultValues={data} />}
-        </div>
-        {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
-      </div>
+      <Layout className="flex h-screen flex-col gap-10">
+        <header className="mx-10 mt-12">
+          <h1 className="text-3xl">Edit Ingredient</h1>{" "}
+        </header>
+        <main className="mx-10 flex flex-grow flex-col gap-4">
+          <div className="max-w-xl rounded-md bg-slate-300 p-8">
+            {data && <IngredientForm defaultValues={data} />}
+          </div>
+          {/* <pre>{JSON.stringify(data, null, 4)}</pre> */}
+        </main>
+      </Layout>
     </>
   )
 }

@@ -17,7 +17,7 @@ const forms = plugin.withOptions(function (options = { strategy: undefined }) {
     const rules = [
       {
         base: [
-          "[type='text']",
+          "[type='text']:not([class])", // not class = quick bad hack for react select
           "[type='email']",
           "[type='url']",
           "[type='password']",
