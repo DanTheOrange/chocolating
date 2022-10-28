@@ -45,7 +45,7 @@ export const NutritionBlock = ({ ingredients, ingredientsInRecipe }: NutritionBl
       <p>Amount Per Serving</p>
       <div className="flex flex-row justify-between">
         <p>
-          <span className="font-bold">Calories</span>&nbsp;{calories.toFixed()}
+          <span className="font-bold">Calories</span>&nbsp;{(calories || 0).toFixed()}
         </p>
         <p className="text-end">% Daily Value*</p>
       </div>

@@ -15,6 +15,7 @@ export const IngredientSelector = () => {
     (_: MultiValue<any>, { option, removedValue }: ActionMeta<any>) => {
       if (option) addIngredient(option.value)
       if (removedValue) removeIngredient(removedValue.value)
+      // TODO: clear all action
     },
     [addIngredient, removeIngredient]
   )
