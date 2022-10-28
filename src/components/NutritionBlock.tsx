@@ -41,25 +41,30 @@ export const NutritionBlock = ({ ingredients, ingredientsInRecipe }: NutritionBl
     <section className="border-2 border-black bg-white p-2">
       <h2 className="text-3xl font-bold tracking-tight">Nutrition Facts</h2>
       <p>Serving size (100g)</p>
-      <hr className="my-2 h-2 border-0 bg-black" />
+      <hr className="my-2 h-2 border-none bg-black" />
       <p>Amount Per Serving</p>
       <div className="flex flex-row justify-between">
-        <p>Calories {calories.toFixed()}</p>
+        <p>
+          <span className="font-bold">Calories</span>&nbsp;{calories.toFixed()}
+        </p>
         <p className="text-end">% Daily Value*</p>
       </div>
-      <hr className="border-1 my-2 h-1 bg-black" />
+      <hr className="my-2 h-1 border-0 bg-black" />
       <div className="grid grid-cols-2">
-        {Object.entries(stats).map(([key, value]) => (
+        {Object.entries(stats).map(([key, value], i, a) => (
           <Fragment key={key}>
             <p>
               <span className="font-bold">{NUTRITION_STRING_MAP.get(key as keyof Ingredient)}</span>
-              &nbsp;{value.toFixed()}g
+              &nbsp;{(value || 0).toFixed()}g
             </p>
             <p className="text-end">TODO</p>
+            {i + 1 !== a.length && (
+              <hr className="col-span-2 my-0.5 h-[1px] border-none bg-black" />
+            )}
           </Fragment>
         ))}
       </div>
-      <hr className="border-1 my-2 h-1 bg-black" />
+      <hr className="my-2 h-1 border-none bg-black" />
       <p className="text-sm">*Daily values not worked out yet</p>
     </section>
   )

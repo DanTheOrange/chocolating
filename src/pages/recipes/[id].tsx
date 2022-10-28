@@ -66,9 +66,9 @@ const Recipe = ({ id }: InferGetServerSidePropsType<typeof getServerSideProps>) 
           <IngredientSelector />
           <IngredientsList />
           <RecipeNutritionBlock />
-          <pre>{JSON.stringify(data, null, 4)}</pre>
+          {/* <pre>{JSON.stringify(data, null, 4)}</pre>
           <pre>{JSON.stringify(recipe, null, 4)}</pre>
-          <pre>{JSON.stringify(ingredients, null, 4)}</pre>
+          <pre>{JSON.stringify(ingredients, null, 4)}</pre> */}
         </main>
       </Layout>
     </>

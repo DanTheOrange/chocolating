@@ -7,10 +7,10 @@ export const IngredientsList = () => {
 
   return data ? (
     <ul className="flex flex-col gap-2">
-      {ingredients.map(({ ingredientId }) => (
+      {ingredients.map(({ ingredientId, quantity }) => (
         <li key={ingredientId} className="flex flex-row items-baseline justify-between gap-1">
           <p>{data.find(({ id }) => id === ingredientId)?.name}</p>
-          <QuantityInput ingredientId={ingredientId} />
+          <QuantityInput ingredientId={ingredientId} defaultValue={quantity} />
         </li>
       ))}
     </ul>
@@ -19,11 +19,18 @@ export const IngredientsList = () => {
   )
 }
 
-const QuantityInput = ({ ingredientId }: { ingredientId: string }) => {
+const QuantityInput = ({
+  ingredientId,
+  defaultValue,
+}: {
+  ingredientId: string
+  defaultValue: number
+}) => {
   const { updateIngredientQuantity } = useRecipeStore()
 
   return (
     <input
+      defaultValue={defaultValue}
       type="number"
       className="p-1"
       placeholder="quantity"
